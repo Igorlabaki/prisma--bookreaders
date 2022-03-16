@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id         String       @id @default(uuid())
+  username   String       @unique
+  email      String       @unique
+  password   String
+  avatar     String       @default("/images/avatar/default.png")
+  created_at DateTime     @default(now())
+  Books      UsersBooks[]
+  Posts      Posts[]
+  Comments   Comments[]
+
+  @@map("users")
+}
+
+model Posts {
+  id         String     @id @default(uuid())
+  text       String
+  created_at DateTime   @default(now())
+  user_id    String
+  user       Users      @relation(fields: [user_id], references: [id])
+  book_id    String?
+  book       Books?     @relation(fields: [book_id], references: [id])
+  Comments   Comments[]
+
+  @@map("posts")
+}
+
+model Comments {
+  id         String   @id @default(uuid())
+  text       String
+  user_id    String
+  post_id    String
+  user       Users    @relation(fields: [user_id], references: [id])
+  post       Posts    @relation(fields: [post_id], references: [id])
+  created_at DateTime @default(now())
+
+  @@map("comments")
+}
+
+model Books {
+  id              String       @id @default(uuid())
+  title           String       @unique
+  authors         String
+  subtitle        String
+  thumbnail       String
+  categories      String
+  created_at      DateTime     @default(now())
+  description     String
+  publishedDate   String
+  smallThaumbnail String
+  pageCount       Int
+  Users           UsersBooks[]
+  Posts           Posts[]
+
+  @@map("books")
+}
+
+model UsersBooks {
+  id         String   @id @default(uuid())
+  book       Books    @relation(fields: [fk_id_book], references: [id])
+  fk_id_book String
+  user       Users    @relation(fields: [fk_id_user], references: [id])
+  fk_id_user String
+  created_at DateTime @default(now())
+
+  @@map("usersBooks")
+}
