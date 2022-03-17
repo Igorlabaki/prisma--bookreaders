@@ -2,11 +2,16 @@ import { useState }    from "react";
 import { InputPost } from "./styles";
 import usePostsContext from "../../../../hook/usePostsContext";
 import useUserContext from "../../../../hook/useUserContext";
+import { Posts } from "@prisma/client";
 
-export function InputPostComponent(){
+interface InputProps{
+    post?: Posts
+}
+
+export function InputPostComponent({post}:InputProps){
     
     const {user}                    = useUserContext()
-    const {createPost,isLoading}    = usePostsContext()
+    const {createPost,isLoading,createComment}    = usePostsContext()
 
     const [textInput, setTextInput] = useState('')
 
@@ -15,13 +20,30 @@ export function InputPostComponent(){
         user_id: user.id
     }
 
-
-    return(
-        <>
-            <InputPost>
-            <textarea placeholder={"I Love Books..."} value={textInput} onChange={(e) => setTextInput(e.target.value)}/>
-            <div>
-                <button 
+    function handleButton(){
+        if(post){
+            const commentInput = {
+                text: textInput,
+                post_id: post.id,
+                user_id: user.id,
+            }
+            return(
+                <>
+                    <button onClick={(e) => 
+                    {e.preventDefault();
+                    createComment({
+                        commentInput
+                    });
+                    setTextInput("")}
+                    }>
+                        Comment
+                    </button>
+                </>
+            )
+        }else{
+            return(
+            <>
+               <button 
                     onClick={ (e) =>{
                         e.preventDefault();
                         createPost({
@@ -31,7 +53,17 @@ export function InputPostComponent(){
                     }>
                     <p>Post</p>
                 </button>
-            </div>
+            </>
+            )
+        }
+    }
+
+
+    return(
+        <>
+            <InputPost>
+                <textarea placeholder={"I Love Books..."} value={textInput} onChange={(e) => setTextInput(e.target.value)}/>
+                {handleButton()}
             </InputPost>
         </>
     )

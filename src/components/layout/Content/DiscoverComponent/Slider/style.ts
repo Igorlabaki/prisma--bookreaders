@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const SwiperContainer = styled.div`
     width:100%;
-    min-width:1190px;
-    max-width: 940px ;
+    max-width: 920px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
     border-top-left-radius:0.80rem;
     border-top-right-radius:0.80rem;

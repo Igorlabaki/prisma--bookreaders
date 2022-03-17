@@ -3,20 +3,21 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../service/prisma";
 
 export default async (req:NextApiRequest,resp: NextApiResponse) => {
-
+  const idPost  = JSON.parse(req.body)  
   try {
-    const posts = await prisma.posts.findMany({
-        include:{
+    const comments = await prisma.comments.findMany({
+      where:{
+        post_id: idPost
+      },  
+      include:{
             user: true,
-            book: true,
-            Comments: true,
-            Likes: true      
+            post: true     
         },
         orderBy:{
-            created_at: 'desc'
+            created_at: 'asc'
         }
     });
-    resp.json(posts)
+    resp.json(comments)
   } catch (error) {
     resp.json(error.message)
   }

@@ -20,6 +20,7 @@ model Users {
   Books      UsersBooks[]
   Posts      Posts[]
   Comments   Comments[]
+  Likes      Likes[]
 
   @@map("users")
 }
@@ -33,6 +34,7 @@ model Posts {
   book_id    String?
   book       Books?     @relation(fields: [book_id], references: [id])
   Comments   Comments[]
+  Likes      Likes[]
 
   @@map("posts")
 }
@@ -76,4 +78,14 @@ model UsersBooks {
   created_at DateTime @default(now())
 
   @@map("usersBooks")
+}
+
+model Likes {
+  id         String   @id @default(uuid())
+  like       Boolean  @default(false)
+  post_id    String
+  post       Posts    @relation(fields: [post_id], references: [id])
+  user_id    String
+  user       Users    @relation(fields: [user_id], references: [id])
+  created_at DateTime @default(now())
 }

@@ -42,7 +42,7 @@ export function Header(){
 
     return(
         <HeaderComponent>
-           <Link href="/discover"><LogoContainer src="/images/logo/logo-color.png" alt="" /></Link>
+           <Link href="/home"><LogoContainer src="/images/logo/logo-color.png" alt="" /></Link>
            <SearchInput/>
            <MenuContainer>
                 <p>{user.username}</p>

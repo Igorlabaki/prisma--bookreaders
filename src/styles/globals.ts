@@ -60,4 +60,11 @@ export const GlobalStyle = createGlobalStyle`
             position: relative;
             border-radius: 0.60rem;
         }
+
+    .comment-arrow{
+        position: absolute;
+        left: 92px;
+        top: 121px;
+        color: #8BC34A;
+    }
 `
