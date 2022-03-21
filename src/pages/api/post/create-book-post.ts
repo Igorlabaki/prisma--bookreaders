@@ -36,7 +36,6 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
     }); 
     resp.json(savedBookUser)
   } catch (error) {
-    console.log(error)
     resp.json(error.message)
   }
 

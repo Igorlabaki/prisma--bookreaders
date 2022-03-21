@@ -21,7 +21,6 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
     });
     resp.json(savedLike)
   } catch (error) {
-    console.log(error)
     resp.json(error.message)
   }
 

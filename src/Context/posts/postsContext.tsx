@@ -52,11 +52,12 @@ export function PostsContextProvider({children}: ContextProvider){
     async function  getAllPosts (){
         setIsLoading(true)
         try {
-            const response  = await fetch('/api/post/getAllposts') 
+            const response  = await fetch('/api/post/getAllPosts') 
             const result    = await response.json()
             setPosts(result)
         } catch (error) {
-            console.log(error)          
+            console.log(error)  
+            console.log(error.message)    
         }
         setTimeout(() => setIsLoading(false),3000)
     }

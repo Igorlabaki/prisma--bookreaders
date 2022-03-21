@@ -48,7 +48,6 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
   } catch (error) {
     console.log(error)
     resp.json(error.message)
-    console.log('aqui q cagou')
   }
 
 }

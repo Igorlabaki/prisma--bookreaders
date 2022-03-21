@@ -57,7 +57,7 @@ export function MemberContextProvider({children}: ContextProvider){
             getUserPots(id)
             getList()
         } catch (error) {  
-            console.log(error.mensage)   
+            console.log(error)   
         }
         setTimeout(() => setIsLoading(false),3000)
     }

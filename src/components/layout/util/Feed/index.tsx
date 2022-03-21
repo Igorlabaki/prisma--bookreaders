@@ -17,6 +17,7 @@ import { InputPostComponent } from '../inputPost'
 import { BoxComponent } from '../Box'
 import { LoadingComponent } from '../Loading'
 import { PaginationComponent } from '../pagination'
+import { MdModeComment, MdOutlineModeComment } from 'react-icons/md'
 
 interface FeedProps{
     type: string
@@ -27,6 +28,7 @@ export function FeedComponent({type}: FeedProps){
     const {isLoading,createLike,getAllPosts,posts,userPosts,getUserPots} = usePostsContext()
     const {getMember,getBooksMember,member} = useMemberContext()
     const {currentPage,elementsPerPage} = usePaginationContext()
+    const [color , setColor] = useState()
     const router = useRouter()
 
     useEffect(() => {
@@ -80,7 +82,16 @@ export function FeedComponent({type}: FeedProps){
                                 <IconsContainer>
                                     <LikeComponent post={post}/>
                                     <CommentIconContainer>
-                                        <FcComments fontSize={20} color={'rgb(188, 252, 179)'} /> {`(${post.Comments.length})`}                  
+                                        {
+                                            post.Comments.length == 0 ?
+                                            <>
+                                                <MdModeComment   fontSize={20} color={'#d0edad'} /> {`(${post.Comments.length})`} 
+                                            </>
+                                            :
+                                            <>
+                                                <MdModeComment fontSize={20} color={' #8BC34A'} /> {`(${post.Comments.length})`}                  
+                                            </>
+                                        }
                                     </CommentIconContainer>
                                 </IconsContainer>
                                 {post.Comments  ? <CommentComponent post={post}/> : null}
@@ -89,7 +100,7 @@ export function FeedComponent({type}: FeedProps){
                         </PostContainer>
                     )
                 })}
-           <PaginationComponent type={type}/>
+            <PaginationComponent type={type}/>
             </>
             }
         </BoxComponent>

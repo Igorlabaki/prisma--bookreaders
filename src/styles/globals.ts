@@ -93,6 +93,8 @@ export const GlobalStyle = createGlobalStyle`
         color: #8BC34A;
     }
 
+    
+
     .chart{
         background-color: var(--blue-secundary);
     }

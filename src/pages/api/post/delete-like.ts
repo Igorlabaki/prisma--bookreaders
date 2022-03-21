@@ -10,7 +10,7 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
         }
     });
 
-    resp.send('Post deleted')
+    resp.json(deletedlike)
   } catch (error) {
     resp.json(error.message)
   }

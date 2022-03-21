@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../service/prisma";
 
 export default async (req:NextApiRequest,resp: NextApiResponse) => {
-
   try {
     const posts = await prisma.posts.findMany({
         include:{
@@ -19,6 +18,7 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
     resp.json(posts)
   } catch (error) {
     resp.json(error.message)
+    console.log(error.message)
   }
 
 }

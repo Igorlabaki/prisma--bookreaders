@@ -14,7 +14,6 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
         user: true
       }
     });
-    console.log(memberBooks)
     resp.json(memberBooks)
 } catch (error) {
     console.log(error)
