@@ -6,7 +6,7 @@ export const PaginationContainer = styled.ul`
     align-items: center;
     list-style: none;
     font-weight: 700;
-    color: var(--blue-button);
+    color: var(--blue-primary);
     cursor: pointer;
     gap: 0.2rem;
 
@@ -18,7 +18,7 @@ export const PaginationContainer = styled.ul`
 
         :hover{
             filter: brightness(0.8);
-            background-color: var(--blue-hover);
+            background-color: var(--blue-secundary);
         }
     }
 
@@ -37,6 +37,6 @@ export const ButtonArrow = styled.button`
 
     :hover{
         filter: brightness(0.8);
-        background-color: var(--blue-hover);
+        background-color: var(--blue-secundary);
     }
 `

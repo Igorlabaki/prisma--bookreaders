@@ -4,9 +4,7 @@ export const PhotoContainer = styled.img`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100% !important;
-    height: 230px;
-    border-radius: 0.8rem !important;
+    width: 60% !important;
     cursor: pointer;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2); 
     opacity: 1;
@@ -14,12 +12,15 @@ export const PhotoContainer = styled.img`
     height: auto  !important;;
     transition: .5s ease;
     backface-visibility: hidden;
+    border-radius: 50%;
 `
 
 export const NavProfileContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 0.5rem;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
     border-top-left-radius: 0.80rem;

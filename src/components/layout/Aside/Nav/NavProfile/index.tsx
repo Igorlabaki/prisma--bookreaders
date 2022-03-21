@@ -6,11 +6,13 @@ import { MdLibraryBooks }   from "react-icons/md";
 import { PhotoContainer,NavProfileContainer, InfoContainer, IconContainer, Container, TextContainer, MiddleContainer} from "./style";
 import useModalContext from "../../../../../hook/useModalContext";
 import useUserContext from "../../../../../hook/useUserContext";
+import useMemberContext from "../../../../../hook/useMemberContext";
 
 export function NavProfile(){
 
     const {user} = useUserContext()
     const {handleOpenPhotoModal} = useModalContext()
+    const {member} = useMemberContext()
     /*const {pageRead,averagePages} =     useBookFirebaseContext()
 
     function handleUserPhoto(){
@@ -35,13 +37,13 @@ export function NavProfile(){
     return(
         <>
             <NavProfileContainer>
+                <PhotoContainer src={member?.avatar} alt="" />
                 <PhotoModalComponent/>
                 <InfoContainer>
                     <ImBooks fontSize={30} color={'gray'}/>
                     <MdLibraryBooks fontSize={28} color={'gray'}/>
                     <BsTrophyFill fontSize={25} color={'gray'}/>
                 </InfoContainer>
-                <h4>{user.username}</h4>
             </NavProfileContainer>
         </>
     )

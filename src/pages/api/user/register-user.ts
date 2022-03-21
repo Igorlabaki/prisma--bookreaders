@@ -13,7 +13,6 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
       },
     });
     resp.json(savedUser)
-    console.log(resp.json(savedUser))
   } catch (error) {
     resp.json(error.message)
   }

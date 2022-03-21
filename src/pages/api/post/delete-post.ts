@@ -10,7 +10,6 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
         }
     });
     resp.send('Post deleted')
-    console.log(deletedPost)
   } catch (error) {
     console.log('nao encontrado')
     resp.json(error.message)

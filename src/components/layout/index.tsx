@@ -26,19 +26,19 @@ export function LayoutComponent({children} : LayoutProps){
     }, [])
     
 
-    /*function handleAsideProfile(){
-        if(asPath == '/profile'){
+    function handleAsideProfile(){
+        if(asPath.includes('profile') || asPath.includes('member')){
            return  <Aside profileMode={true}/>
         }else{
            return  <Aside profileMode={false}/>
         }
-    }*/
+    }
 
     return(
         <LayoutContainer>
             <Header/>
             <MainContainer>
-                <Aside/>
+                {handleAsideProfile()}
                 {children}
             </MainContainer>
         </LayoutContainer>

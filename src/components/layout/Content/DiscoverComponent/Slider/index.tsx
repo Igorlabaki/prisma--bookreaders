@@ -28,7 +28,7 @@ export function SliderComponent (){
                             <HeaderComponent>
                                 <h4>Welcome to Book Readers</h4>
                             </HeaderComponent>
-                                <p>Share your readings and comments, interact with your friends and rate the books you've read.  Let’s keep the love of reading alive.</p>
+                                <p>Share your readings and comments, interact with your friends and rate the books you've read.<br/>  Let’s keep the love of reading alive.</p>
                                 <p></p>
                         </TextContainer>
                         <img src="/images/photos/j.jpg" alt="img"/>

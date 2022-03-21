@@ -3,7 +3,7 @@ import { BodyBox, BoxContainer, HeaderBox } from "./style";
 
 interface BoxProps{
     children?: ReactNode
-    title    : string
+    title?    : string
 }
 
 export function BoxComponent({title,children}:BoxProps){

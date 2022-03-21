@@ -7,8 +7,11 @@ export const LoadingContainer = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
+    
 
-    img{
-        height: 50px;
-    }
+`
+
+
+export const Img = styled.img`
+ height: 50px !important;
 `

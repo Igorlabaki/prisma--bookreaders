@@ -12,7 +12,6 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
         user_id: infoLike.idU
       },  
     }); 
-    console.log(likes)
     resp.json(likes)
   } catch (error) {
     resp.json(error.message)

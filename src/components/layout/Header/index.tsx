@@ -45,8 +45,8 @@ export function Header(){
            <Link href="/home"><LogoContainer src="/images/logo/logo-color.png" alt="" /></Link>
            <SearchInput/>
            <MenuContainer>
-                <p>{user.username}</p>
-                <PhotoContainer src={user.avatar} alt="user photo" />
+                <p>{user?.username}</p>
+                <PhotoContainer src={user?.avatar} alt="user photo" />
                 {handleDropDownMenu()}
                 {
                     modal ? 

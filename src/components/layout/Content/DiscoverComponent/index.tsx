@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FeedComponent } from "./Feed";
+import { FeedComponent } from "./../../util/Feed"
 import { SliderComponent } from "./Slider";
 import { DiscoverContainer } from "./style";
 import usePostsContext from "../../../../hook/usePostsContext";
@@ -15,7 +15,7 @@ export function DiscoverComponent(){
     return(
         <DiscoverContainer>
             <SliderComponent/>
-            <FeedComponent/>
+            <FeedComponent type="allPosts"/>
         </DiscoverContainer>
     )
 }

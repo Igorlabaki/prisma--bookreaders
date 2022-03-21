@@ -1,10 +1,10 @@
-import { LoadingContainer } from "./styles";
+import { Img, LoadingContainer } from "./styles";
 
 export function LoadingComponent(){
     
     return(
         <LoadingContainer>
-            <img src="images/gif/load.gif" alt="" />
+            <Img src="images/gif/load.gif" alt="" />
         </LoadingContainer>
     )
 }

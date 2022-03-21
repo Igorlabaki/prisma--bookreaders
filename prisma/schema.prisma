@@ -52,30 +52,32 @@ model Comments {
 }
 
 model Books {
-  id              String       @id @default(uuid())
-  title           String       @unique
-  authors         String
-  subtitle        String
-  thumbnail       String
-  categories      String
-  created_at      DateTime     @default(now())
-  description     String
-  publishedDate   String
-  smallThaumbnail String
-  pageCount       Int
-  Users           UsersBooks[]
-  Posts           Posts[]
+  id             String       @id @default(uuid())
+  google         String
+  title          String?      @unique
+  authors        String?
+  subtitle       String?
+  pageCount      Int?
+  categories     String?
+  created_at     DateTime     @default(now())
+  description    String?      @db.VarChar(200)
+  publishedDate  String?
+  smallThumbnail String?      @default("/images/photos/book-default.jpg") @db.VarChar(500)
+  Users          UsersBooks[]
+  Posts          Posts[]
 
   @@map("books")
 }
 
 model UsersBooks {
-  id         String   @id @default(uuid())
-  book       Books    @relation(fields: [fk_id_book], references: [id])
-  fk_id_book String
-  user       Users    @relation(fields: [fk_id_user], references: [id])
-  fk_id_user String
-  created_at DateTime @default(now())
+  id               String   @id @default(uuid())
+  book             Books    @relation(fields: [fk_id_book], references: [id])
+  fk_id_book       String
+  user             Users    @relation(fields: [fk_id_user], references: [id])
+  fk_id_user       String
+  created_at       DateTime @default(now())
+  currentlyReading Boolean  @default(false)
+  wantRead         Boolean  @default(false)
 
   @@map("usersBooks")
 }

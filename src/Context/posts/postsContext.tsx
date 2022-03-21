@@ -1,4 +1,4 @@
-import { Comments, Posts, Users } from '@prisma/client'
+import { Books, Comments, Posts, Users } from '@prisma/client'
 import {createContext,Dispatch,ReactNode,SetStateAction,useState} from 'react'
 import useUserContext from '../../hook/useUserContext'
 
@@ -16,10 +16,12 @@ interface PostsContext{
     createPost              ?:(post: object)  => void,
     createComment           ?:(post: object)  => void,
     createLike              ?:(post: object,userId:String)  => void,
+    createBookPost          ?:(postText: String,bookInputId:String,userInputId:String)  => void,
     deletePost              ?:(postId: String) => void,
     deleteComment           ?:(postId: String) => void,
     deleteLike              ?:(likeId: String) => void,
     getAllPosts?:           () => void,
+    getUserPots?:           (userId:String) => void,
     currentPostPage?:       number
     postsPerPage?:          number
     setCurrentPostPage?:    Dispatch<SetStateAction<number>>
@@ -34,10 +36,10 @@ export function PostsContextProvider({children}: ContextProvider){
     const {user} = useUserContext()
     
     const [posts, setPosts]                 = useState<Posts[]>([]);
+    const [userPosts, setUserPosts]                 = useState<Posts[]>([]);
     const [comments, setComments]           = useState<Comments[]>([]);
     const [post, setPost]                   = useState<Object>();
     const [error,setError]                  = useState(null)
-    const [userPosts, setUserPosts]         = useState([]); 
     const [isLoading,setIsLoading]          = useState(false)
     const [currentPostPage, setCurrentPostPage] = useState<number>(1);
     const [postsPerPage, setPostsPerPage]   = useState<number>(5);
@@ -47,14 +49,28 @@ export function PostsContextProvider({children}: ContextProvider){
         setTimeout(() => setError(null),time )
     }
 
-   
-    
     async function  getAllPosts (){
         setIsLoading(true)
         try {
             const response  = await fetch('/api/post/getAllposts') 
             const result    = await response.json()
             setPosts(result)
+        } catch (error) {
+            console.log(error)          
+        }
+        setTimeout(() => setIsLoading(false),3000)
+    }
+
+    async function  getUserPots (userId : string){
+        setIsLoading(true)
+        try {
+            setUserPosts([])
+            const response  = await fetch('/api/post/get-user-posts',{
+                method:'POST',
+                body:JSON.stringify(userId)
+            }) 
+            const result    = await response.json()
+            setUserPosts(result)
         } catch (error) {
             console.log(error)          
         }
@@ -69,6 +85,31 @@ export function PostsContextProvider({children}: ContextProvider){
                await fetch('/api/post/create-post',{
                     method:'POST',
                     body: JSON.stringify(postInput)
+               })
+               getAllPosts()
+            } 
+            catch (error) {
+                console.log(error) 
+            }
+            setTimeout(() => setIsLoading(false),3000)
+        }else{
+            showError('',3000)
+        }
+    }
+
+     
+    async function  createBookPost (postText: string, bookInputId:String, userInputId:String){
+        if(postText != ""){
+            setIsLoading(true)
+            const postBookInput = {
+                bookId: bookInputId,
+                userId: userInputId,
+                postText: postText,
+            }
+            try {
+               await fetch('/api/post/create-book-post',{
+                    method:'POST',
+                    body: JSON.stringify(postBookInput)
                })
                getAllPosts()
             } 
@@ -171,11 +212,13 @@ export function PostsContextProvider({children}: ContextProvider){
             createPost, 
             setCurrentPostPage,
             getAllPosts,
+            getUserPots,
             deletePost,
             deleteComment,
             createComment,
             createLike,
             deleteLike,
+            createBookPost,
             comments,
             currentPostPage,
             postsPerPage,

@@ -3,7 +3,6 @@ import prisma from "../../../service/prisma";
 
 export default async (req:NextApiRequest,resp: NextApiResponse) => {
   const commentInfo  = JSON.parse(req.body)
-  console.log(commentInfo.commentInput.user_id)
   try {
     const savedComment = await prisma.comments.create({
       data:{

@@ -23,6 +23,7 @@ export function UserContextProvider( {children}: UserContextProvider){
 
     const router = useRouter()
     const [user, setUser]   = useState<Users>(null)
+
     const [error, setError] = useState<String>('')
 
     async function registerUser(userInput:Users){
@@ -54,12 +55,15 @@ export function UserContextProvider( {children}: UserContextProvider){
         }
     }
 
+
+
+
     return(
         <UserContext.Provider value={{
             user,
             error,
             login,
-            registerUser
+            registerUser,
         }}>
             {children}
         </UserContext.Provider>

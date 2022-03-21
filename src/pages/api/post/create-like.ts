@@ -4,7 +4,6 @@ import prisma from "../../../service/prisma";
 export default async (req:NextApiRequest,resp: NextApiResponse) => {
   const postInfo  = JSON.parse(req.body)
   try {
-    console.log(postInfo.idP)
     const savedLike = await prisma.likes.create({
       data:{
         like: true,
