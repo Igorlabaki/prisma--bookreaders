@@ -18,18 +18,27 @@ export const HeaderComponent = styled.div`
     p{
         margin-right: 10px;
     }
+    gap: 2rem;
 `
 
 export const LogoContainer = styled.img`
    cursor: pointer;
-    width: 200px;
+   width: 140px;
+
+    @media (min-width: 768px) {
+        width: 200px;
+    }
+    
 `
 
 export const ArrowButtonContainer = styled.div`
-    margin-top: 10px;
-    cursor: pointer;
-    border: 0;
-    background-color: transparent;
+    display: hidden;
+    @media (min-width: 768px) {
+        margin-top: 10px;
+        cursor: pointer;
+        border: 0;
+        background-color: transparent;
+    }
 `
 
 export const PhotoContainer = styled.img`
@@ -39,8 +48,23 @@ export const PhotoContainer = styled.img`
 `
 
 export const MenuContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    display: none !important;
+   
+    @media (min-width: 768px) {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+`
+
+
+export const HamburguerMenu = styled.div`
+    display: flex !important;
+    cursor: pointer;
+
+    @media (min-width: 768px) {
+       display: none !important;
+    }
+    
 `

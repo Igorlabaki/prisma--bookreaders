@@ -19,8 +19,12 @@ model Users {
   created_at DateTime     @default(now())
   Books      UsersBooks[]
   Posts      Posts[]
+  messages   Chat[]
+  Chat       Chat[]       @relation("RecieverOfChat")
   Comments   Comments[]
   Likes      Likes[]
+  followers  Follows[]    @relation("follower")
+  following  Follows[]    @relation("following")
 
   @@map("users")
 }
@@ -90,4 +94,24 @@ model Likes {
   user_id    String
   user       Users    @relation(fields: [user_id], references: [id])
   created_at DateTime @default(now())
+}
+
+model Follows {
+  follower    Users  @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   Users  @relation("following", fields: [followingId], references: [id])
+  followingId String
+
+  @@id([followerId, followingId])
+}
+
+model Chat {
+  id         String   @id @default(uuid())
+  receiverId String
+  receiver   Users    @relation("RecieverOfChat", fields: [receiverId], references: [id])
+  sender     Users    @relation(fields: [senderId], references: [id])
+  senderId   String
+  message    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
 }

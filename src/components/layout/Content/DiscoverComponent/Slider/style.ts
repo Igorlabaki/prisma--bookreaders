@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const SwiperContainer = styled.div`
     width:100%;
-    max-width: 1190px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
     border-top-left-radius:0.80rem;
     border-top-right-radius:0.80rem;
@@ -18,10 +17,9 @@ export const SliderContainer = styled.div`
     z-index:0 ;
     
     img{
-        max-width: 100%;
+        width: 100%;
         max-height: 30%;
         object-fit:cover;
-
     }
 `
 
@@ -51,10 +49,18 @@ export const TextContainer = styled.div`
         font-size:1.4rem ;
         font-weight:500 ;
         text-align:start ;
-        line-height: 1.7rem;
+        
+        @media (max-width: 768px) {
+            width: 80%;
+            text-align: justify;
+            font-size:1.2rem ;
+        }
     }
 
     z-index: 50;
+    @media (max-width: 768px) {
+        font-size:2rem ;
+    }
 
 `
 

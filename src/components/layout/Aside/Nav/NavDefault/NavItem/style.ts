@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 export const NavItemContainer = styled.div`
     display: flex;
-    justify-content:start;
+    justify-content:center;
     align-items:center;
     gap:1rem;
     cursor: pointer;
     line-height: 1.25rem;
-    font-size: 1.3rem;
+    font-size: 20px;
     transition: background-color 0.3s;
     padding: 1.33rem;
+    width: 25%;
 
     :hover{
         background-color: var(--blue-secundary);
@@ -23,5 +24,9 @@ export const NavItemContainer = styled.div`
     :last-child{
         border-bottom-left-radius: 0.25rem;
         border-bottom-right-radius: 0.25rem;
+    }
+
+    .pathNavActive{
+        background-color: var(--blue-secundary);
     }
 `

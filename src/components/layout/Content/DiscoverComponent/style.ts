@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
 export const DiscoverContainer = styled.div`
-    padding: 0 10px;
-    display: flex;
-    flex-grow: 1;
-    flex-direction:column;
-    gap:0.6rem;
+   width:100% ;
+   display: flex;
+   flex-direction:column;
+   gap:0.6rem;
+   flex: 1;
+
+   @media (max-width: 768px) {
+    padding: 0;
+   }
 `

@@ -18,4 +18,9 @@ export const FooterContainer = styled.div`
             align-items: center;
             gap: 1rem;
         }
+
+        @media (max-width: 768px) {
+            left: 30%;
+            bottom: 1rem;
+        }
 `

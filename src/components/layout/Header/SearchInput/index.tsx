@@ -1,7 +1,7 @@
 import {useRouter}              from 'next/router'
 import {FiSearch}               from "react-icons/fi"
 import { ReactNode, useEffect, useState }  from "react";
-import { BookContainer, Container, ErrorContainer, ResultListContainer, SerachInputContainer } from "./style";
+import { BookContainer, ErrorContainer, ResultListContainer, SearchContainer, SerachInputContainer } from "./style";
 import useBookContext from "../../../../hook/useBookContext";
 
 export function SearchInput(){ 
@@ -63,16 +63,16 @@ export function SearchInput(){
     }
 
     return (
-        <Container>
             <SerachInputContainer action={`/search/list/${search}`}>
-                <button type="submit" onClick={() => {router.push(`/search/list/${search}`); setSearch('')}}>
-                    <FiSearch fontSize={20} color="wheat"/>
-                </button>
-                <input type="text"  placeholder="Find your book..." value={search}  onChange={e => setSearch(e.target.value)} />
+                <SearchContainer>
+                    <button type="submit" onClick={() => {router.push(`/search/list/${search}`); setSearch('')}}>
+                        <FiSearch fontSize={20} color="wheat"/>
+                    </button>
+                    <input type="text"  placeholder="Find your book..." value={search}  onChange={e => setSearch(e.target.value)} />
+                </SearchContainer>
+                
+                    {handleResultContainer()}
+                
             </SerachInputContainer>
-            <div>
-                {handleResultContainer()}
-            </div>
-        </Container>
     )
 }

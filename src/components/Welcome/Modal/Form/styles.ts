@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
     background-color: transparent;
     position: relative;
     h1{
@@ -9,14 +9,14 @@ export const FormContainer = styled.div`
         font-weight: 700;
         font-size: 2rem;
         text-align: start;
-        margin-bottom: 60px;
+        margin-bottom: 40px;
     }
 
     .close-button{
         font-size: 1.1rem;
         color:rgba(125, 124, 124);
         position: absolute;
-        right: 1.5rem;
+        right: 0.5rem;
         top: 0.5rem;
         border: 0;
         background:transparent;
@@ -28,7 +28,7 @@ export const FormContainer = styled.div`
     }
 
     .redirect-text{
-        margin: 10px 5px;
+        margin: 10px 3px;
         font-size: 1.05rem;
 
         button{
@@ -44,13 +44,17 @@ export const FormContainer = styled.div`
             }
         }
     }
+
+    .border-error{
+        border: 3px solid  #ff9999 ;
+    }
 `
 
 export const ErrorContainer = styled.div`
     display: flex;
-    position: absolute;
+    flex-direction: column;
     justify-content:center;
-    min-width: 500px;
+    min-width: 100%;
     align-items:center;
     color:rgb(232, 51, 51);;
     font-weight: 700;

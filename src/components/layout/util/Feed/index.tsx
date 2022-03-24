@@ -23,14 +23,14 @@ interface FeedProps{
     type: string
 }
 
-export function FeedComponent({type}: FeedProps){
+export function FeedComponent({type}: FeedProps, {data}){
 
     const {isLoading,createLike,getAllPosts,posts,userPosts,getUserPots} = usePostsContext()
     const {getMember,getBooksMember,member} = useMemberContext()
     const {currentPage,elementsPerPage} = usePaginationContext()
     const [color , setColor] = useState()
     const router = useRouter()
-
+    console.log(data)
     useEffect(() => {
         getAllPosts()
         getUserPots(member?.id)
@@ -65,6 +65,7 @@ export function FeedComponent({type}: FeedProps){
                                 <PostHeader>
                                     <RedirectComponent onClick={() => {
                                         getMember(post.user.id)
+                                        getBooksMember(post.user.id)
                                         router.push(`/member/${post.user.id}`)
                                         }}>{post.user.username}</RedirectComponent>
                                     <EditContainer>
@@ -106,3 +107,4 @@ export function FeedComponent({type}: FeedProps){
         </BoxComponent>
     )
 }
+

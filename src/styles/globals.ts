@@ -59,6 +59,15 @@ export const GlobalStyle = createGlobalStyle`
             padding: 1.5rem;
             position: relative;
             border-radius: 0.60rem;
+
+            @media (max-width: 768px) {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                border-radius: 0;
+            }
         }
     /////Modal Search
     .react-modal-search-overlay{
@@ -81,7 +90,30 @@ export const GlobalStyle = createGlobalStyle`
             position: absolute;
             border-radius: 0.60rem;
         }
-    
+     ///////Modal Photo
+
+     .react-modal-photo-overlay{
+            background-color: rgba(0,0,0,0.5);
+            position:fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .react-modal-photo-content{
+            width: 100%;
+            max-width: 576px;
+            background-color: white;
+            padding: 1.5rem;
+            position: relative;
+            border-radius: 0.60rem;
+            box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+        }
+        
     .currentPage{
         background-color: #b3e0ff;
     }
@@ -96,6 +128,23 @@ export const GlobalStyle = createGlobalStyle`
     
 
     .chart{
+        background-color: var(--blue-secundary);
+    }
+
+
+    /* button Follow*/
+
+    .red{
+        color: white;
+        background-color: #61a755;
+    }
+    
+    .green{
+        color:white;
+        background-color: #F44336;
+    }
+
+    .pathNavActive{
         background-color: var(--blue-secundary);
     }
 `

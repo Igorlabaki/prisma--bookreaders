@@ -13,6 +13,7 @@ export default function Input({label,type,onChange,value,required,noRender}: Inp
       <InputContainer>
         <label>{label}:</label>
         <input type={type ?? 'text'}
+            name={label}
             value={value}
             required={required}   
             onChange={e => onChange?.(e.target.value)}>

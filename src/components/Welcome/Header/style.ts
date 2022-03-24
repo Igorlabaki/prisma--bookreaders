@@ -6,7 +6,10 @@ export const Container = styled.div`
     width: 100%;
 
     img{
-        width: 16%;
+        width: 175px;
+        @media (min-width: 768px) {
+        width: 250px;
+        }
     }
 
     div{
@@ -26,4 +29,7 @@ export const Container = styled.div`
             color: rgba(147, 197, 253, var(--tw-text-opacity))
         }
     }
+
+
+
 `

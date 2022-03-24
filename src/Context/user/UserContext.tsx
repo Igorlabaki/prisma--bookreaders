@@ -7,10 +7,11 @@ interface UserContextProvider {
 }
 
 interface UserContext{
-    user?:          Users
+    user?:          any
     error?:         String
-    login?:         (user:Users) => void
-    registerUser?:  (user:Users) => void
+    login?:         (email:string, password:string) => void
+    registerUser?:  (email:string,username:string, password:string) => void
+    getUser?:       (id:string) => void
 }
 
 const initialState: UserContext = {
@@ -22,11 +23,16 @@ export const UserContext = createContext<UserContext>(initialState)
 export function UserContextProvider( {children}: UserContextProvider){
 
     const router = useRouter()
-    const [user, setUser]   = useState<Users>(null)
+    const [user, setUser]   = useState<any>(null)
 
     const [error, setError] = useState<String>('')
 
-    async function registerUser(userInput:Users){
+    async function registerUser(email:string,username:string, password:string){
+        const userInput = {
+            email,
+            username,
+            password
+        }
         try {
             const response = await fetch('/api/user/register-user',{
                 method:'POST',
@@ -35,13 +41,18 @@ export function UserContextProvider( {children}: UserContextProvider){
 
            const result = await response.json()
            setUser(result)
-           router.push('/home')
+           getUser(result.id)
+           router.push('/discover')
         } catch (error) {
             console.log(error)
         }
     }
 
-    async function login(userInput:Users){
+    async function login(email:string,password:string){
+        const userInput = {
+            email,
+            password
+        }
         try {
             const response = await fetch('/api/user/login-user',{
                 method:'POST',
@@ -49,9 +60,22 @@ export function UserContextProvider( {children}: UserContextProvider){
            }) 
            const result = await response.json()
            setUser(result)
-           router.push('/home')
+           router.push('/discover')
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    async function  getUser(id:string){
+        try {
+            const response  = await fetch('/api/user/get-member',{
+                method:'POST',
+                body: JSON.stringify(id)
+            }) 
+            const result    = await response.json()
+            setUser(result)
+        } catch (error) {
+            console.log(error)      
         }
     }
 
@@ -64,6 +88,7 @@ export function UserContextProvider( {children}: UserContextProvider){
             error,
             login,
             registerUser,
+            getUser
         }}>
             {children}
         </UserContext.Provider>

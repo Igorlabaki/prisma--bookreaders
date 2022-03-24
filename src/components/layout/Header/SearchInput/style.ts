@@ -1,20 +1,15 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-
-`
 
 export const SerachInputContainer = styled.form`
     display: flex;
-    justify-content: center;
-    align-items:center;
-    border: 1px solid black;
-    border-radius: 0.25rem;
+    position: relative  ;
+    flex-direction: column;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
     width: 100%;
+    min-width: 250px;
+    box-shadow: 2px 0px 2px 2px rgba(0, 0, 0, 0.2);
 
     button{
         display: flex;
@@ -51,7 +46,7 @@ export const ResultListContainer = styled.div`
     flex-direction: column;
     background-color: white;
     position: absolute;
-    top:3rem;
+    top:2.85rem;
     width: 100%;
     display: flex;
     align-items: start;
@@ -97,7 +92,7 @@ export const BookContainer = styled.div`
     padding: 0.5rem;
 
     :hover{
-        background-color: var(--blue-hover);
+        background-color: var(--blue-secundary);
     }
 
     img{
@@ -114,13 +109,12 @@ export const BookContainer = styled.div`
 
 export const ErrorContainer = styled.div`
     display:flex;
+    width: 100%;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
     position: absolute;
-    top:2.7rem;
-    margin-left: 8%;
-    width: 92%;
+    top:2.85rem;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
     max-height: 500px;
     overflow: auto;
@@ -129,6 +123,7 @@ export const ErrorContainer = styled.div`
     z-index: 20;
     padding: 2rem;
     background-color: white;
+    color: var(--blue-primary);
 `
 
 export const ContainerExternal = styled.div`
@@ -167,4 +162,12 @@ export const ContainerInternal = styled.div`
     position: absolute;
     z-index: 300;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+`
+
+
+export const SearchContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 `

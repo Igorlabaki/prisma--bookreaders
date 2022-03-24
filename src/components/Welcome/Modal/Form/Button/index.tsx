@@ -21,12 +21,12 @@ export default function Button({children,userInput,loginButton}: ButtonProps) {
             <>
             {   
                 loginButton ?
-                    <ButtonContainer onClick={() => login(userInput)}>
+                    <ButtonContainer>
                     <p>{'Confirm'}</p>
                     {children}
                     </ButtonContainer>      
                 :
-                    <ButtonContainer onClick={() => registerUser(userInput)}>
+                    <ButtonContainer >
                     <p>{'Confirm'}</p>
                     {children}   
                     </ButtonContainer>    

@@ -4,22 +4,25 @@ export const PhotoContainer = styled.img`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60% !important;
+    width: 150px;
     cursor: pointer;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2); 
     opacity: 1;
     display: block;
-    height: auto  !important;;
+    height: auto;
     transition: .5s ease;
     backface-visibility: hidden;
     border-radius: 50%;
+    
+    :hover{
+        opacity: 0.5;
+    }
 `
 
 export const NavProfileContainer = styled.div`
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     padding: 0.5rem;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
@@ -27,51 +30,99 @@ export const NavProfileContainer = styled.div`
     border-top-right-radius: 0.80rem;
     background-color: aliceblue;
     position: relative ;
-
-
-    h4{
-        text-align: center;
-        padding: 0.55rem;
-    }
-
-    :hover img {
-        opacity: 0.3;
-    }
-
-    hover div {
-        opacity: 1;
-    }
-`
-
-export const InfoContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    font-weight: 700;
-    gap: 0.7rem;
-    padding: 0.6rem;
-`
-
-export const IconContainer = styled.div`
-    cursor: pointer;
-`
-
-export const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 2rem;
     padding: 1rem;
 `
 
+export const InfoContainer = styled.div`
+    height: 100% ;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: flex-start;
+    font-size: 1rem;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    label{
+        font-weight: 600;
+    }
 
-export const TextContainer = styled.div`
-    background-color: #4CAF50;
-    color: white;
-    font-size: 16px;
-    padding: 16px 32px;
+    div{
+        display: flex;
+    }
 `
+
+export const ButtonFollowContainer = styled.button`
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background-color: #61a755;
+    color:white;
+    padding: 0.5rem;
+    border-radius: 0.80rem;
+    transition: filter 0.3s;
+    width: 150px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    :hover{
+        filter: brightness(1.1);
+    }
+    `
+
+export const ButtonUnFollowContainer = styled.button`
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    color: white;
+    background-color: #F44336;
+    padding: 0.5rem;
+    border-radius: 0.80rem;
+    transition: filter 0.3s;
+    width: 150px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    :hover{
+        filter: brightness(1.1);
+    }
+`
+
+export const DisplayBookContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-direction: column  ;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+     
+    div{
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+        justify-content: center;
+        align-items: center;
+
+        p{
+            font-size: 0.7rem;
+            color: gray;
+        }
+    }
+`
+export const BookContainer = styled.div`
+    display: flex;
+    height: auto;
+    gap: 1rem;
+    width: 100%;
+    align-items: flex-start;
+ `
+
+export const CooverBook = styled.img`
+    height: 110px ;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+`
+
 
 export const MiddleContainer = styled.div`
     transition: .5s ease;

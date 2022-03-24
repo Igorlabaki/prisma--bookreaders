@@ -10,6 +10,12 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
       where:{
           email:    userInfo.email,
           password: userInfo.password
+      },
+      include:{
+        Books: true ,
+        Posts: true,
+        followers:true,
+        following:true,
       }
     });
     resp.json(login)
