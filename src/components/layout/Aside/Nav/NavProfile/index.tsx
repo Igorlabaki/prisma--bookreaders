@@ -1,4 +1,4 @@
-import PhotoModalComponent  from "../../Modal";
+import PhotoModalComponent  from "../NavProfile/Modal";
 import { PhotoContainer,NavProfileContainer, InfoContainer, ButtonFollowContainer, ButtonUnFollowContainer, DisplayBookContainer, CooverBook, BookContainer} from "./style";
 import useModalContext from "../../../../../hook/useModalContext";
 import useUserContext from "../../../../../hook/useUserContext";

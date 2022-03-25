@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useBookContext from "../../../hook/useBookContext";
-import PhotoModalComponent  from "./Modal";
+import PhotoModalComponent  from "./Nav/NavProfile/Modal";
 import { NavDefault}        from "./Nav/NavDefault";
 import { NavProfile }       from "./Nav/NavProfile";
 import { ContainerAside }   from "./style";

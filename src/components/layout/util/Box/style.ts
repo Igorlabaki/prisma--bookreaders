@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BoxContainer = styled.div`
-    width: 100%;
+    width: 100% !important;
     border-top-left-radius: 0.60rem;
     border-top-right-radius: 0.60rem;
     overflow:hidden;

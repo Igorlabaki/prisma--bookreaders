@@ -19,7 +19,7 @@ export const ButtonContainer = styled.button`
         }
 `
 
-export const UploadContainer = styled.div`
+export const UploadContainer = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,7 +58,7 @@ export const UploadContainer = styled.div`
             position: absolute;
             top: 0;
             right: 65px;
-            color: var(--blue-button);
+            color: var(--blue-primary);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -83,7 +83,7 @@ export const UploadContainer = styled.div`
             justify-content: center;
             align-items: center;
             border: 0;
-            background-color: var(--blue-button);
+            background-color: var(--blue-primary);
             color: wheat;
             padding: 1rem;
             border-radius: 0.80rem;
