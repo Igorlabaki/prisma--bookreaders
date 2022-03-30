@@ -1,9 +1,14 @@
 import Form from './Form';
 import Modal from 'react-modal';
-import { ModalContainer } from './style';
+import { ButtonContainer, ModalContainer, Title } from './style';
 import useModalContext from '../../../hook/useModalContext';
+import { signIn } from "next-auth/react"
+import { IoLogoGithub } from 'react-icons/io';
+interface ModalComponent{
+    providers:any
+}
 
-export default function ModalComponent() {
+export default function ModalComponent({providers}:ModalComponent) {
 
     const {isLoginModalOpen,isRegisterModalOpen,handleCloseLoginModal,handleCloseRegisterModal} = useModalContext()
 
@@ -19,7 +24,15 @@ export default function ModalComponent() {
                                 className="react-modal-auth-content"
                                 ariaHideApp={false}
                             >
-                                <Form title="Login"/>
+                            <Title>Sign In</Title>
+                             {Object.values(providers).map((provider:any) => (
+                                <div key={provider.name}>
+                                    <ButtonContainer className='github' onClick={() => signIn(provider.id)}>
+                                        {provider.name.includes('GitHub') ? <IoLogoGithub fontSize={30}/> : null}
+                                       <p> Sign in with {provider.name}</p>
+                                    </ButtonContainer>
+                                </div>
+                            ))}
                             </Modal>
                         </ModalContainer>) 
                     :

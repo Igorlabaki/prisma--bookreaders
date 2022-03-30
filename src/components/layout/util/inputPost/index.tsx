@@ -17,15 +17,15 @@ export function InputPostComponent({post}:InputProps){
 
     const postInput = {
         text: textInput,
-        user_id: user.id
+        user_id: user?.id
     }
 
     function handleButton(){
         if(post){
             const commentInput = {
                 text: textInput,
-                post_id: post.id,
-                user_id: user.id,
+                post_id: post?.id,
+                user_id: user?.id,
             }
             return(
                 <>

@@ -1,4 +1,3 @@
-import { Users } from '@prisma/client'
 import { useRouter } from 'next/router'
 import {createContext,ReactNode,useState} from 'react'
 
@@ -9,8 +8,7 @@ interface UserContextProvider {
 interface UserContext{
     user?:          any
     error?:         String
-    login?:         (email:string, password:string) => void
-    registerUser?:  (email:string,username:string, password:string) => void
+    login?:         (email:string) => void
     getUser?:       (id:string) => void
 }
 
@@ -27,40 +25,14 @@ export function UserContextProvider( {children}: UserContextProvider){
 
     const [error, setError] = useState<String>('')
 
-    async function registerUser(email:string,username:string, password:string){
-        const userInput = {
-            email,
-            username,
-            password
-        }
-        try {
-            const response = await fetch('/api/user/register-user',{
-                method:'POST',
-                body: JSON.stringify(userInput)
-           }) 
-
-           const result = await response.json()
-           setUser(result)
-           getUser(result.id)
-           router.push('/discover')
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    async function login(email:string,password:string){
-        const userInput = {
-            email,
-            password
-        }
+    async function login(email:string){
         try {
             const response = await fetch('/api/user/login-user',{
                 method:'POST',
-                body: JSON.stringify(userInput)
+                body: JSON.stringify(email)
            }) 
            const result = await response.json()
            setUser(result)
-           router.push('/discover')
         } catch (error) {
             console.log(error)
         }
@@ -87,7 +59,6 @@ export function UserContextProvider( {children}: UserContextProvider){
             user,
             error,
             login,
-            registerUser,
             getUser
         }}>
             {children}

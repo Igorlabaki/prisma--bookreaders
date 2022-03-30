@@ -5,7 +5,7 @@ import prisma from "../../../service/prisma";
 export default async (req:NextApiRequest,resp: NextApiResponse) => {
   const info  = JSON.parse(req.body)
   try {
-    const savedBook = await prisma.usersBooks.update({
+    const savedBook = await prisma.userBooks.update({
       where:{
           id: info.bookId
       },

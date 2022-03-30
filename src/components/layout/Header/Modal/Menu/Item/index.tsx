@@ -2,6 +2,7 @@ import Link from "next/link";
 import {ItemContainer} from './style'
 import useModalContext from "../../../../../../hook/useModalContext";
 import useUserContext from "../../../../../../hook/useUserContext";
+import { signOut } from "next-auth/react";
 
 interface ItemProps {
     text: string
@@ -23,9 +24,7 @@ export function ItemComponent({text, href,icon}:ItemProps){
                     <p>{icon}{text}</p>
                 </Link>
             ):
-                <p onClick={() => {
-                    handleCloseConfigModal()
-                }}>
+                <p onClick={() => signOut()}>
                     {icon}{text}
                 </p>
             }

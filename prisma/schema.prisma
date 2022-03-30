@@ -10,21 +10,62 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
-  id         String       @id @default(uuid())
-  username   String       @unique
-  email      String       @unique
-  password   String
-  avatar     String       @default("/images/avatar/default.png")
-  created_at DateTime     @default(now())
-  Books      UsersBooks[]
-  Posts      Posts[]
-  messages   Chat[]
-  Chat       Chat[]       @relation("RecieverOfChat")
-  Comments   Comments[]
-  Likes      Likes[]
-  followers  Follows[]    @relation("follower")
-  following  Follows[]    @relation("following")
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
+}
+
+model User {
+  id            String      @id @default(cuid())
+  name          String?
+  email         String?     @unique
+  emailVerified DateTime?   @map("email_verified")
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  created_at    DateTime    @default(now())
+  Books         UserBooks[]
+  Posts         Posts[]
+  messages      Chat[]
+  Chat          Chat[]      @relation("RecieverOfChat")
+  Comments      Comments[]
+  Likes         Likes[]
+  followers     Follows[]   @relation("follower")
+  following     Follows[]   @relation("following")
 
   @@map("users")
 }
@@ -34,7 +75,7 @@ model Posts {
   text       String
   created_at DateTime   @default(now())
   user_id    String
-  user       Users      @relation(fields: [user_id], references: [id])
+  user       User       @relation(fields: [user_id], references: [id])
   book_id    String?
   book       Books?     @relation(fields: [book_id], references: [id])
   Comments   Comments[]
@@ -48,7 +89,7 @@ model Comments {
   text       String
   user_id    String
   post_id    String
-  user       Users    @relation(fields: [user_id], references: [id])
+  user       User     @relation(fields: [user_id], references: [id])
   post       Posts    @relation(fields: [post_id], references: [id])
   created_at DateTime @default(now())
 
@@ -56,34 +97,34 @@ model Comments {
 }
 
 model Books {
-  id             String       @id @default(uuid())
+  id             String      @id @default(uuid())
   google         String
-  title          String?      @unique
+  title          String?     @unique
   authors        String?
   subtitle       String?
   pageCount      Int?
   categories     String?
-  created_at     DateTime     @default(now())
-  description    String?      @db.VarChar(200)
+  created_at     DateTime    @default(now())
+  description    String?     @db.VarChar(200)
   publishedDate  String?
-  smallThumbnail String?      @default("/images/photos/book-default.jpg") @db.VarChar(500)
-  Users          UsersBooks[]
+  smallThumbnail String?     @default("/images/photos/book-default.jpg") @db.VarChar(500)
+  User           UserBooks[]
   Posts          Posts[]
 
   @@map("books")
 }
 
-model UsersBooks {
+model UserBooks {
   id               String   @id @default(uuid())
   book             Books    @relation(fields: [fk_id_book], references: [id])
   fk_id_book       String
-  user             Users    @relation(fields: [fk_id_user], references: [id])
+  user             User     @relation(fields: [fk_id_user], references: [id])
   fk_id_user       String
   created_at       DateTime @default(now())
   currentlyReading Boolean  @default(false)
   wantRead         Boolean  @default(false)
 
-  @@map("usersBooks")
+  @@map("userBooks")
 }
 
 model Likes {
@@ -92,14 +133,14 @@ model Likes {
   post_id    String
   post       Posts    @relation(fields: [post_id], references: [id])
   user_id    String
-  user       Users    @relation(fields: [user_id], references: [id])
+  user       User     @relation(fields: [user_id], references: [id])
   created_at DateTime @default(now())
 }
 
 model Follows {
-  follower    Users  @relation("follower", fields: [followerId], references: [id])
+  follower    User   @relation("follower", fields: [followerId], references: [id])
   followerId  String
-  following   Users  @relation("following", fields: [followingId], references: [id])
+  following   User   @relation("following", fields: [followingId], references: [id])
   followingId String
 
   @@id([followerId, followingId])
@@ -108,8 +149,8 @@ model Follows {
 model Chat {
   id         String   @id @default(uuid())
   receiverId String
-  receiver   Users    @relation("RecieverOfChat", fields: [receiverId], references: [id])
-  sender     Users    @relation(fields: [senderId], references: [id])
+  receiver   User     @relation("RecieverOfChat", fields: [receiverId], references: [id])
+  sender     User     @relation(fields: [senderId], references: [id])
   senderId   String
   message    String
   createdAt  DateTime @default(now())

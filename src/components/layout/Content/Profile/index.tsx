@@ -15,7 +15,8 @@ export function ProfileComponent({id}: userIdProps){
     const { getMember} =  useMemberContext()
 
     useEffect(() => {
-        getMember(user.id)
+        getMember(user?.id)
+        console.log(user)
     }, [])
     
     return(

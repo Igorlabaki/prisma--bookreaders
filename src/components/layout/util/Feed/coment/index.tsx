@@ -66,11 +66,11 @@ export function CommentComponent({post}: EditProps){
                         return(
                             <>
                                 <ComentBody key={comment.id}>
-                                    <Photo src={comment.user.avatar} alt="avatar" />
+                                    <Photo src={comment.user.image} alt="avatar" />
                                     <CommentInfo>
                                         <CommentEditContainer>
                                             <PostHeader>
-                                                <p>{comment.user.username}</p>
+                                                <p>{comment.user.name}</p>
                                                 <p><span>Posted at {moment(comment.created_at).format('MMMM Do YYYY, h:mm:ss a')}</span></p>
                                             </PostHeader>
                                         <EditComponent comment={comment}></EditComponent>   

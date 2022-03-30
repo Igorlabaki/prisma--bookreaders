@@ -5,7 +5,7 @@ import prisma from "../../../service/prisma";
 export default async (req:NextApiRequest,resp: NextApiResponse) => {
   const idInput  = JSON.parse(req.body)
   try {
-    const member = await prisma.users.findFirst({
+    const member = await prisma.user.findFirst({
       where:{
           id: idInput
       },

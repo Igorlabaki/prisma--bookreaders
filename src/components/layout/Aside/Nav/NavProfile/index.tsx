@@ -22,6 +22,7 @@ export function NavProfile(){
 
     useEffect(() => {
         getMember(memberid)
+        console.log(memberid)
     }, [])
     
    function handleFollow(){
@@ -55,12 +56,12 @@ export function NavProfile(){
     return(
         <>
             <NavProfileContainer>
-                { user?.id == member?.id ? <PhotoContainer src={member?.avatar} alt="" onClick={handleOpenPhotoModal}/> : <PhotoContainer src={member?.avatar} alt=""/>}
+                { user?.id == member?.id ? <PhotoContainer src={user?.image} alt="" onClick={handleOpenPhotoModal}/> : <PhotoContainer src={member?.image} alt=""/>}
                 <PhotoModalComponent/>
                 <InfoContainer>
                     <div>
                         <label>Username:&nbsp;</label>
-                        <p>{member?.username}</p>    
+                        <p>{member?.name}</p>    
                     </div>
                     <div>
                         <label>Books read: &nbsp;</label>

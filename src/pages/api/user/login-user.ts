@@ -3,13 +3,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../service/prisma";
 
 export default async (req:NextApiRequest,resp: NextApiResponse) => {
-  const userInfo  = JSON.parse(req.body)
-
+  const email  = JSON.parse(req.body)
+console.log(email)
   try {
-    const login = await prisma.users.findFirst({
+    const login = await prisma.user.findFirst({
       where:{
-          email:    userInfo.email,
-          password: userInfo.password
+          email: email,
       },
       include:{
         Books: true ,
@@ -21,6 +20,7 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
     resp.json(login)
   } catch (error) {
     resp.json(error.message)
+    console.log(error)
   }
 
 }

@@ -11,8 +11,7 @@ export default function Header() {
     <Container>
       <img src="/images/logo/logo-white.png" alt="logo" />
       <div>
-        <Button text="Login"    onClick={handleOpenLoginModal}/>
-        <Button text="Register" onClick={handleOpenRegisterModal}/>
+        <Button text="Sign in"    onClick={handleOpenLoginModal}/>
       </div>
     </Container>
   )

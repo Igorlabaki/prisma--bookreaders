@@ -60,14 +60,14 @@ export function FeedComponent({type}: FeedProps, {data}){
                 {currentBooks?.map((post) => {
                     return(
                         <PostContainer key={post.id}>
-                            <Photo src={post.user.avatar} alt="" />
+                            <Photo src={post.user.image} alt="" />
                             <PostContent>
                                 <PostHeader>
                                     <RedirectComponent onClick={() => {
                                         getMember(post.user.id)
                                         getBooksMember(post.user.id)
                                         router.push(`/member/${post.user.id}`)
-                                        }}>{post.user.username}</RedirectComponent>
+                                        }}>{post.user.name}</RedirectComponent>
                                     <EditContainer>
                                         <p><span>Posted at {moment(post.created_at).format('MMMM Do YYYY, h:mm:ss a')}</span></p>
                                         <EditComponent post={post}/>

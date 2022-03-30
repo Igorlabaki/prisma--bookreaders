@@ -147,4 +147,8 @@ export const GlobalStyle = createGlobalStyle`
     .pathNavActive{
         background-color: var(--blue-secundary);
     }
+
+    .github{
+        background-color: black;
+    }
 `

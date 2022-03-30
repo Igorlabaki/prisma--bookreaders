@@ -1,4 +1,4 @@
-import { Books, Comments, Posts, Users } from '@prisma/client'
+import { Books, Comments, Posts } from '@prisma/client'
 import {createContext,Dispatch,ReactNode,SetStateAction,useState} from 'react'
 import useUserContext from '../../hook/useUserContext'
 

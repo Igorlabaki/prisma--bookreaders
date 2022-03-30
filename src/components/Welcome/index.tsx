@@ -2,8 +2,9 @@ import { WelcomeContainer, ContainerIntroText} from "./styles";
 import Header               from "./Header";
 import ModalComponent       from "./Modal";
 import  FooterComponent     from "./Footer";
+import { getProviders } from "next-auth/react";
 
-export default function WelcomePage() {
+export default function WelcomePage({providers}) {
   return (
       <WelcomeContainer>
         <Header/>
@@ -16,7 +17,7 @@ export default function WelcomePage() {
           </div>
         </ContainerIntroText>
         <FooterComponent/>
-        <ModalComponent/>
+        <ModalComponent providers={providers}/>
       </WelcomeContainer>
   )
 }

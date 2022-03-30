@@ -4,7 +4,7 @@ import prisma from "../../../service/prisma";
 export default async (req:NextApiRequest,resp: NextApiResponse) => {
   const postInfo  = JSON.parse(req.body)
   try {
-    const savedBookUser = await prisma.usersBooks.create({
+    const savedBookUser = await prisma.userBooks.create({
       data: {
         book:{
           connect:{

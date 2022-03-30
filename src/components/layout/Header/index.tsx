@@ -65,7 +65,7 @@ export function Header(){
                     {renderModal()}
                </HamburguerMenu>
                 <MenuContainer>
-                    <PhotoContainer src={user?.avatar} alt="user photo" />
+                    <PhotoContainer src={user?.image} alt="user photo" />
                     {handleDropDownMenu()}
                     {renderModal()}
                 </MenuContainer>

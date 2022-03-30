@@ -5,8 +5,8 @@ import { ReactNode, useEffect } from "react";
 import { useRouter } from 'next/router'
 import useModalContext from "../../hook/useModalContext";
 import useUserContext from "../../hook/useUserContext";
-
-
+import { useSession, getSession } from "next-auth/react"
+import { GetServerSideProps } from "next";
 interface LayoutProps{
     children: ReactNode;
 }
@@ -14,16 +14,18 @@ interface LayoutProps{
 export function LayoutComponent({children} : LayoutProps){
 
     const { asPath } = useRouter()
-    const { user} = useUserContext()
+    const { login,user} = useUserContext()
     const {handleOpenLoginModal} = useModalContext()
     const router = useRouter()
-    
+
+    const {data: session} = useSession()
+
     useEffect(() => {
-        if(!user){
+        if(!session){
             router.push('/')
-            handleOpenLoginModal()
         }
     }, [])
+    
     
 
     function handleAsideProfile(){
@@ -35,12 +37,19 @@ export function LayoutComponent({children} : LayoutProps){
     }
 
     return(
-        <LayoutContainer>
-            <Header/>
-            <MainContainer>
-                {handleAsideProfile()}
-                {children}
-            </MainContainer>
-        </LayoutContainer>
+        <>
+            {session ? 
+                <LayoutContainer>
+                    <Header/>
+                    <MainContainer>
+                        {handleAsideProfile()}
+                        {children}
+                    </MainContainer>
+                </LayoutContainer>
+                :
+                <p>jorge</p>
+            }
+        </>
     )
 }
+

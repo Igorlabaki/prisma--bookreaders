@@ -8,6 +8,8 @@ import useModalContext from "../../../../../hook/useModalContext";
 import ModalComponent from "../list/Modal";
 import { BoxComponent } from "../../../util/Box";
 import { LoadingComponent } from "../../../util/Loading";
+import { FeedComponent } from "../../../util/Feed";
+import { InputPostComponent } from "../../../util/inputPost";
 
 interface SearchProps{
     id?:any
@@ -62,6 +64,7 @@ export function SearchComponent({id}: SearchProps){
                             <div>{book.volumeInfo.description}</div>
                         </TextContainer>
                     </BookContainer>
+                    <InputPostComponent/>
                     <BoxComponent title={`Others books written by ${book.volumeInfo?.authors[0]}`}>
                         {isLoading ? 
                             <>
