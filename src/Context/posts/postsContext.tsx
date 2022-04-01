@@ -16,7 +16,7 @@ interface PostsContext{
     createPost              ?:(post: object)  => void,
     createComment           ?:(post: object)  => void,
     createLike              ?:(post: object,userId:String)  => void,
-    createBookPost          ?:(postText: String,bookInputId:String,userInputId:String)  => void,
+    createBookPost          ?:(postText: String,bookInputId:String,userInputId:String,typeList:string)  => void,
     deletePost              ?:(postId: String) => void,
     deleteComment           ?:(postId: String) => void,
     deleteLike              ?:(likeId: String) => void,
@@ -99,13 +99,14 @@ export function PostsContextProvider({children}: ContextProvider){
     }
 
      
-    async function  createBookPost (postText: string, bookInputId:String, userInputId:String){
+    async function  createBookPost (postText: string, bookInputId:String, userInputId:String,typeList:string){
         if(postText != ""){
             setIsLoading(true)
             const postBookInput = {
                 bookId: bookInputId,
                 userId: userInputId,
                 postText: postText,
+                typeList: typeList
             }
             try {
                await fetch('/api/post/create-book-post',{

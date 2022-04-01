@@ -1,14 +1,14 @@
 import {InputContainer} from './styles'
 interface InputProps{
-    label: string
-    value: string
+    label?: string
+    value?: string
     required?: boolean
     noRender?: boolean
     type?: "text" | "password" | "email"
-    onChange: (event: any) => void
+    onChange?: (event: any) => void
 }
 
-export default function Input({label,type,onChange,value,required,noRender}: InputProps) {
+export default function InputComponent({label,type,onChange,value,required,noRender}: InputProps) {
     return noRender ? null : (
       <InputContainer>
         <label>{label}:</label>

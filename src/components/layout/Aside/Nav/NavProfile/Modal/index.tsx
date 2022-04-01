@@ -52,7 +52,7 @@ export default function PhotoModalComponent() {
              <ButtonContainer  onClick={handleClosePhotoModal}><AiOutlineClose/></ButtonContainer>
              <UploadContainer>
                 <h2>Upload photo</h2>
-                <PhotoContainer src={user?.avatar} alt="user photo" />
+                <PhotoContainer src={user?.image} alt="user photo" />
                 <form>
                     <div>
                         <span>

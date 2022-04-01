@@ -3,8 +3,9 @@ import EmailProvider from 'next-auth/providers/email';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { PrismaClient } from '@prisma/client';
 import GitHubProvider from 'next-auth/providers/github';
-import {prisma} from '../../../service/prisma'
 // import CredentialsProvider from 'next-auth/providers/credentials';
+
+const prisma = new PrismaClient();
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -16,6 +17,10 @@ export default NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }), 
+    EmailProvider({
+      server: process.env.EMAIL_SERVER,
+      from: process.env.EMAIL_FROM
+    })
     // CredentialsProvider({
     //   credentials: {
     //     email: { label: 'Email', type: 'text ', placeholder: 'jsmith@example.com' },

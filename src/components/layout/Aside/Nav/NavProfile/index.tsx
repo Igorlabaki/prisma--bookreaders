@@ -8,6 +8,7 @@ import { LoadingComponent } from "../../../util/Loading";
 import useFollowContext from "../../../../../hook/useFollowContext";
 import { useRouter } from "next/router";
 import getMember from "../../../../../pages/api/user/get-member";
+import useBookContext from "../../../../../hook/useBookContext";
 
 export function NavProfile(){
 
@@ -20,10 +21,16 @@ export function NavProfile(){
 
     const memberid = router.asPath.slice(8)
 
-    useEffect(() => {
-        getMember(memberid)
-        console.log(memberid)
-    }, [])
+    if(router.asPath.includes('member')){
+        useEffect(() => {
+            getMember(memberid)
+        }, [])
+    }else if(router.asPath.includes('profile')){
+        useEffect(() => {
+            getMember(user.id)
+        }, [])
+    }
+
     
    function handleFollow(){
         if(user?.following?.filter( (item) => item.followingId = member?.id).length == 0){
@@ -45,13 +52,15 @@ export function NavProfile(){
         }
    }
 
-
+   const readList = memberBooks?.filter((item) => {return item.list_type == 'read'})
+   const readingList = memberBooks?.filter((item) => {return item.list_type.includes('reading')})
+   const wantList = memberBooks?.filter((item) => {return item.list_type.includes('wantRead')})
+   
    const shortest    =   getShortestBook(memberBooks)
    const longest     =   getLongestBook(memberBooks)
    const lastBook    =   getLastRead(memberBooks)
    const pagesRead   =   getPagesRead(memberBooks)
    const averagePages=   getAveragePages(memberBooks)
-
 
     return(
         <>
@@ -65,7 +74,7 @@ export function NavProfile(){
                     </div>
                     <div>
                         <label>Books read: &nbsp;</label>
-                        <p>{memberBooks?.length}</p>    
+                        <p>{readList?.length}</p>    
                     </div>
                     <div>
                         <label>Pages read: &nbsp;</label>
@@ -107,6 +116,24 @@ export function NavProfile(){
                     <DisplayBookContainer>
                         <CooverBook src={lastBook?.book?.smallThumbnail} alt=""  onClick={() => router.push(`/search/id/${lastBook?.book?.google}`)}/>
                         <h3>Last read</h3>
+                    </DisplayBookContainer> : null
+                    }
+                        { readList?.length > 0  ? 
+                      <DisplayBookContainer>
+                          <CooverBook src={readList[0]?.book.smallThumbnail} alt=""  onClick={() => router.push(`/search/id/${readList[0]?.book?.google}`)}/>
+                          <h3>Read List</h3>
+                      </DisplayBookContainer> : null
+                      }
+                    { readingList?.length > 0  ? 
+                    <DisplayBookContainer>
+                        <CooverBook src={readingList[0]?.book.smallThumbnail} alt=""  onClick={() => router.push(`/search/id/${readingList[0]?.book?.google}`)}/>
+                        <h3>Reading list</h3>
+                    </DisplayBookContainer> : null
+                    }
+                      { wantList?.length > 0  ? 
+                    <DisplayBookContainer>
+                        <CooverBook src={wantList[0]?.book.smallThumbnail} alt=""  onClick={() => router.push(`/search/id/${wantList[0]?.book?.google}`)}/>
+                        <h3>Wish list</h3>
                     </DisplayBookContainer> : null
                     }
                 </BookContainer>

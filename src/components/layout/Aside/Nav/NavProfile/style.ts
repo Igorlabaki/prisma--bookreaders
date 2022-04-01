@@ -36,7 +36,7 @@ export const NavProfileContainer = styled.div`
 
 export const InfoContainer = styled.div`
     height: 100% ;
-    width: 30%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content:flex-start;

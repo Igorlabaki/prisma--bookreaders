@@ -17,7 +17,7 @@ export function BookComponent({post}: BookComponentProps){
         <PostBookContainer>
             <img src={post.book.smallThumbnail} onClick={() => router.push(`/search/id/${post.book.google}`)} alt="book-cover" />
             <div>
-                <h3>{post.book.title}</h3>
+                <h3 onClick={() => router.push(`/search/id/${post.book.google}`)}>{post.book.title}</h3>
                 <p>{`${post.book.description}...`}</p>
                 <span>
                     <p><strong>Author:&nbsp;</strong>{post.book.author}</p>

@@ -47,8 +47,9 @@ export default function ModalComponent() {
     const [text, setText] = useState('')
     const [bookChoice, setBookChoice] = useState('')
     const [read, setRead] = useState(Boolean)
-
-
+    
+    const [selected,setSelected]=useState(null)
+    
     return (
         <Modal 
             isOpen={isPostBookModalOpen}  
@@ -63,7 +64,7 @@ export default function ModalComponent() {
                     <h3>{book?.volumeInfo.title}</h3>
                     <CheckBoxContainer>
                     <label>Wicth list ?</label>
-                    <select id="lists" name="lists">
+                    <select id="lists" name="lists" value={selected} onChange={(e) => setSelected(e.target.value)}>
                         <option value="read">Read List</option>
                         <option value="reading">Currently Reading List</option>
                         <option value="wantRead">WantRead</option>
@@ -79,7 +80,7 @@ export default function ModalComponent() {
                                     book,
                                     text,
                                     user.id,
-                                    'currentlyReading'
+                                    selected
                                 );
                                 handleClosePostBookModal()
                             }

@@ -1,8 +1,8 @@
 import {createContext,Dispatch,ReactNode,SetStateAction,useState} from 'react'
 import axios from 'axios'
-import { Books, Users, UsersBooks } from '@prisma/client'
 import usePostsContext from '../../hook/usePostsContext'
 import { ObjectKeys } from 'react-hook-form/dist/types/path/common'
+import { UserBooks } from '@prisma/client'
 
 interface ContextProvider {
     children: ReactNode
@@ -24,7 +24,8 @@ interface MemberContext{
     getPagesRead?:     (memberBooks) => number
     getLastRead?:     (memberBooks) => any
     getMember?:     (id:string) => void
-    getBooksMember?:(id:string) => void
+    getBooksMember?:(id:string) => void,
+    userBooks?: UserBooks[]
 }
 
 export const MemberContext = createContext<MemberContext>({
@@ -43,6 +44,7 @@ export function MemberContextProvider({children}: ContextProvider){
     const [shortestBook,setShortestBook]    = useState()
     const [lastRead,setLastRead]    = useState()
     const [isLoading,setIsLoading]    = useState(true)
+    const [userBooks,setUserBooks]    = useState<UserBooks[]>()
 
     const {getUserPots} = usePostsContext()
 
@@ -69,6 +71,7 @@ export function MemberContextProvider({children}: ContextProvider){
         })
         return counter
     }
+
 
     async function  getMember(id:string){
         try {

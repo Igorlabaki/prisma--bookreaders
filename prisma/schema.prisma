@@ -115,14 +115,13 @@ model Books {
 }
 
 model UserBooks {
-  id               String   @id @default(uuid())
-  book             Books    @relation(fields: [fk_id_book], references: [id])
-  fk_id_book       String
-  user             User     @relation(fields: [fk_id_user], references: [id])
-  fk_id_user       String
-  created_at       DateTime @default(now())
-  currentlyReading Boolean  @default(false)
-  wantRead         Boolean  @default(false)
+  id         String   @id @default(uuid())
+  book       Books    @relation(fields: [fk_id_book], references: [id])
+  fk_id_book String
+  user       User     @relation(fields: [fk_id_user], references: [id])
+  fk_id_user String
+  created_at DateTime @default(now())
+  list_type  String?
 
   @@map("userBooks")
 }

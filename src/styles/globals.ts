@@ -148,7 +148,7 @@ export const GlobalStyle = createGlobalStyle`
         background-color: var(--blue-secundary);
     }
 
-    .github{
+    .GitHub{
         background-color: black;
     }
 `

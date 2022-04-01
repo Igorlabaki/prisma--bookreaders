@@ -15,7 +15,8 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
           connect:{
             id: postInfo.userId
           }
-        }
+        },
+        list_type: postInfo.typeList
       },
     });
     const savedPost = await prisma.posts.create({

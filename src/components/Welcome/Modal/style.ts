@@ -24,6 +24,20 @@ export const Title = styled.h1`
 
 `
 
+export const Input = styled.input`
+        outline: none;
+        border: none;
+        border-radius:0.25rem;
+        line-height: 2rem;
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        :focus{
+            background-color: rgba(219, 234, 254);
+        }
+
+`
+
 
 export const ButtonContainer = styled.button`
     color: white;
@@ -49,7 +63,6 @@ export const ButtonContainer = styled.button`
     p{
         margin-right: 5px;
     }
-
   
 `
 

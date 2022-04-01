@@ -13,11 +13,12 @@ import { InputPostComponent } from "../../../util/inputPost";
 
 interface SearchProps{
     id?:any
+    authorList: any
 }
 
-export function SearchComponent({id}: SearchProps){
+export function SearchComponent({id,authorList}: SearchProps){
 
-    const {getBook,book,getBookByAuthor,authorsList,isLoading,setAuthorList} = useBookContext()
+    const {getBook,book,getBookByAuthor,isLoading,setAuthorList} = useBookContext()
     const {handleOpenPostBookModal} = useModalContext()
     const router = useRouter()
 
@@ -51,15 +52,15 @@ export function SearchComponent({id}: SearchProps){
                                 </button>
                                 </AddBookContainer>
                         <TextContainer>
-                            <h1>{book.volumeInfo.title}</h1>
+                            <h1>{book?.volumeInfo.title}</h1>
                            
-                                <h2>{book.volumeInfo.subtitle}</h2>
+                                <h2>{book?.volumeInfo.subtitle}</h2>
                             
-                            <p><strong>Author:</strong>&nbsp;{book.volumeInfo.authors?.at(0)}</p>
+                            <p><strong>Author:</strong>&nbsp;{book?.volumeInfo.authors?.at(0)}</p>
                             <p><strong>Category:</strong>&nbsp;{book.volumeInfo?.categories?.at(0)}</p>
                             <div>
-                                <p><strong>Published:<strong/></strong>&nbsp;{book.volumeInfo.publishedDate}</p>
-                                <p><strong>Pages:<strong/></strong>&nbsp;{book.volumeInfo.pageCount}</p>
+                                <p><strong>Published:<strong/></strong>&nbsp;{book?.volumeInfo.publishedDate}</p>
+                                <p><strong>Pages:<strong/></strong>&nbsp;{book?.volumeInfo.pageCount}</p>
                             </div>
                             <div>{book.volumeInfo.description}</div>
                         </TextContainer>
@@ -73,22 +74,22 @@ export function SearchComponent({id}: SearchProps){
                             </>
                         :
                             <AuthorBookContainer>
-                                {authorsList?.map((book,i) => {
+                                {authorList?.map((book,i) => {
                                     return (
-                                            <div key={i} onClick={() => router.push(`/search/id/${book.id}`)}>
+                                            <div key={i} onClick={() => router.push(`/search/id/${book?.id}`)}>
                                                 {
-                                                    book.volumeInfo?.imageLinks ?
-                                                        <img src={book.volumeInfo.imageLinks.smallThumbnail} alt="" />   
+                                                    book?.volumeInfo?.imageLinks ?
+                                                        <img src={book?.volumeInfo?.imageLinks?.thumbnail} alt="" />   
                                                     :
                                                         <img src='/images/photos/book-default' alt="" /> 
                                                 }
-                                                <h4>{book.volumeInfo?.title}</h4>
+                                                <h4>{book?.volumeInfo?.title}</h4>
                                             </div>
                                 )}
                                 )}
-                                <ModalComponent/>
                             </AuthorBookContainer>
                         }
+                        <ModalComponent/>
                     </BoxComponent>
                 </>
             )

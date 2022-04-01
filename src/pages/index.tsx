@@ -1,11 +1,11 @@
-import { getProviders, signIn } from "next-auth/react"
+import { getProviders, getCsrfToken } from "next-auth/react"
 import WelcomePage from "../components/Welcome"
 import FooterComponent from "../components/Welcome/Footer"
 import Header from "../components/Welcome/Header"
 import ModalComponent from "../components/Welcome/Modal"
 import { ContainerIntroText, WelcomeContainer } from "../components/Welcome/styles"
 
-export default function Home({ providers }) {
+export default function Home({ providers,csrfToken}) {
   return (
     <>
             <WelcomeContainer>
@@ -19,7 +19,7 @@ export default function Home({ providers }) {
                 </div>
               </ContainerIntroText>
               <FooterComponent/>
-              <ModalComponent providers={providers}/>
+              <ModalComponent providers={providers} token={csrfToken}/>
       </WelcomeContainer>
     </>
   )
@@ -27,7 +27,9 @@ export default function Home({ providers }) {
 
 export async function getServerSideProps(context) {
   const providers = await getProviders()
+  const csrfToken = await getCsrfToken()
+
   return {
-    props: { providers },
+    props: { providers,csrfToken},
   }
 }

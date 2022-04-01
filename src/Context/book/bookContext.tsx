@@ -1,6 +1,6 @@
 import {createContext,Dispatch,ReactNode,SetStateAction,useState} from 'react'
 import axios from 'axios'
-import { Books } from '@prisma/client'
+import { Books, UserBooks } from '@prisma/client'
 import usePostsContext from '../../hook/usePostsContext'
 
 interface ContextProvider {
@@ -34,6 +34,9 @@ interface BookContext{
     booksList?:         book[],
     booksSearch?:       book[], 
     authorsList?:       book[],
+    readingList?:       any[],
+    readList?:       any[],
+    wantList?:       any[],
     isLoading?:           boolean,
     currentBookPage?:   number
     booksPerPage?:      number
@@ -46,6 +49,7 @@ interface BookContext{
     getBookByAuthor?:   (bookSearch:any, author?: string) => void
     getBook?:           (id:any) => void
     bookDb?:           any
+    getList?:           (typeList:string, userId: string) => void
 }
 
 export const BookContext = createContext<BookContext>({
@@ -64,6 +68,9 @@ export function BookContextProvider({children}: ContextProvider){
     const [currentBookPage, setCurrentBookPage]         = useState<number>(1);
     const [booksPerPage, setBooksPerPage]       = useState<number>(5);
     const [authorsList, setAuthorList]          = useState<book[]>([]);
+    const [readingList, setReadingList]          = useState<any[]>([]);
+    const [readList, setReadList]          = useState<any[]>([]);
+    const [wantList, setWantList]          = useState<any[]>([]);
     const [bookId, setBookId]                       = useState<String>();
 
 
@@ -97,7 +104,12 @@ export function BookContextProvider({children}: ContextProvider){
         const url = `q=a+inauthor:${authorTrim}`
   
         const resp = await axios.get(`https://www.googleapis.com/books/v1/volumes?${url}&key=AIzaSyCQPpX0QFUTs45EhUe1Ou5FNjEAjjvtYRQ`)
-                   .then(resp => setAuthorList(resp.data.items))
+                   .then(resp => {
+                       for (let index = 0; index <= resp.data.items.length; index++) {
+                           list.push(resp.data.items[index]);
+                       }
+                   })
+        setAuthorList(list)
         setTimeout(() => setIsLoading(false), 2000)
     }
     
@@ -105,7 +117,6 @@ export function BookContextProvider({children}: ContextProvider){
         setIsLoading(true)
         let info = {
             book: bookInput,
-            list: typeList,
             userId: userId
         }
         try {
@@ -118,6 +129,7 @@ export function BookContextProvider({children}: ContextProvider){
                 text,
                 result.id,
                 userId,
+                typeList,
             )
         } 
         catch (error) {
@@ -145,6 +157,35 @@ export function BookContextProvider({children}: ContextProvider){
         setTimeout(() => setIsLoading(false),3000)
     }
 
+    
+    async function  getList(typeList:string, userId: string){
+        setIsLoading(true)
+        const info = {
+            typeList,
+            userId
+        }
+        try {
+            const response = await fetch(`/api/book/get-${typeList}-list`,{
+                method:'POST',
+                body: JSON.stringify(info)
+            })
+            const result    = await response.json()
+            if(typeList.includes('wantRead')){
+                setWantList(result)
+            }
+            if(typeList.includes('reading')){
+                setReadingList(result)
+            }
+            if(typeList.includes('read')){
+                setReadList(result)
+            }
+        } 
+        catch (error) {
+            console.log(error) 
+        }
+        setTimeout(() => setIsLoading(false),3000)
+    }
+
 
 
     return(
@@ -165,7 +206,11 @@ export function BookContextProvider({children}: ContextProvider){
             setAuthorList,
             bookId,
             setBookId,
-            bookDb
+            bookDb,
+            getList,
+            readingList,
+            wantList,
+            readList
         }}>
             {children}
         </BookContext.Provider>

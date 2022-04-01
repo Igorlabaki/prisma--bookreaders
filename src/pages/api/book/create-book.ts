@@ -6,10 +6,7 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
   let authors 
   let categories 
   let description
-  let currentlyReading
-  let wantRead
-
-
+ 
   if(item.book.volumeInfo?.categories != undefined){
     categories = item.book.volumeInfo?.categories[0]
   }
@@ -19,14 +16,6 @@ export default async (req:NextApiRequest,resp: NextApiResponse) => {
 
   if(item.book.volumeInfo?.description != undefined){
     description = item.book.volumeInfo?.description.slice(0,  200)
-  }
-
-  if(item.list.includes('currently')){
-    currentlyReading = true
-    wantRead = false
-  }else if(item.list.includes('wantRead')){
-    currentlyReading = false
-    wantRead = true
   }
 
   try {

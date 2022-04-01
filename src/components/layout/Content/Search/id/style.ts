@@ -72,6 +72,7 @@ export const AuthorBookContainer = styled.div`
         gap: 1rem;
         cursor: pointer;
         text-align:center ;
+        width: 100%;
 
         img{
             width: 150px ;
